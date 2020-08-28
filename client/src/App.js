@@ -1,25 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { InnerEyesProvider } from 'react-inner-eyes';
+import PostCreate from './PostCreate';
+import PostList from './PostList';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <InnerEyesProvider>
+      <div className="container">
+        <PostCreate />
+        <PostList />
+      </div>
+    </InnerEyesProvider>
   );
 }
 
