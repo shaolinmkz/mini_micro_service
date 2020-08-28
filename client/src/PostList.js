@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useInnerEyes } from 'react-inner-eyes';
 import CommentCreate from './CommentCreate';
+import CommentList from './CommentList';
 
 
 export default () => {
@@ -41,6 +42,7 @@ export default () => {
               <h4 className="card-title">{`${index + 1}.`}</h4>
               <p className="card-text">{post.title}</p>
               <CommentCreate postId={post.id} />
+              <CommentList postId={post.id} />
             </div>
           </div>
         ))

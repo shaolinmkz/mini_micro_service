@@ -33,7 +33,7 @@ export default () => {
           <label>Title:</label>
           <input type="text" value={title} className="form-control" onChange={({ target: { value }}) => setTitle(value)}  />
           <br />
-          <button type="submit" className="btn btn-primary">SUBMIT</button>
+          <button type="submit" className="btn btn-primary">POST</button>
         </div>
       </form>
     </section>

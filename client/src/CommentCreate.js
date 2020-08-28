@@ -1,25 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-// import { useInnerEyes } from 'react-inner-eyes';
 
 
 export default ({ postId }) => {
   const URL = `http://localhost:4001/posts/${postId}/comments`;
 
-  // const { getFuncs } = useInnerEyes();
-
   const [content, setContent] = useState('');
-
-  // const { fetchComments } = getFuncs();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const { data: { data } } = await axios.post(URL, { content });
+      await axios.post(URL, { content });
       setContent('');
-      // fetchComments();
-      console.log(data)
     } catch (error) {
       return error;
     }
@@ -33,7 +26,7 @@ export default ({ postId }) => {
           <label>Title:</label>
           <input type="text" value={content} className="form-control" onChange={({ target: { value }}) => setContent(value)}  />
           <br />
-          <button type="submit" className="btn btn-primary">SUBMIT</button>
+          <button type="submit" className="btn btn-primary">COMMENT</button>
         </div>
       </form>
     </section>
