@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 export default ({ postId }) => {
-  const URL = `http://localhost:4001/posts/${postId}/comments`;
+  const URL = `http://localhost:4002/posts/${postId}/comments`;
 
   const [content, setContent] = useState('');
 
@@ -20,7 +20,7 @@ export default ({ postId }) => {
 
   return (
     <section>
-      <h4>Create Comment</h4>
+      <h5><strong>Comment</strong></h5>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Title:</label>

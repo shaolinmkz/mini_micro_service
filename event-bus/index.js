@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { randomBytes } = require('crypto');
+const axios = require('axios');
 const cors = require('cors');
 
 const app = express();
@@ -9,33 +9,26 @@ const app = express();
 app.use(cors());
 
 // parse various different custom JSON types as JSON
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
-const posts = {};
+app.post('/events', (req, res) => {
+    const { body } = req;
+    const URLS = [
+      'http://localhost:4000/events',
+      'http://localhost:4002/events',
+    ];
 
-app.get('/posts', (req, res) => {
-    res.status(200).json({
-        data: posts
+    URLS.forEach(async (url) => {
+      await axios.post(url, body)
+      .then(({ data }) => console.log(data))
+      .catch(err => {
+        console.error(err.message)
+      });
     })
+
+    res.send({ status: 'OK' });
 });
 
-app.post('/posts', (req, res) => {
-    // 4 bytes of random digits which should be hexidecimals
-    const id = randomBytes(4).toString('hex');
-    const { title } = req.body;
-
-    const data = {
-        id,
-        title
-    }
-
-    posts[id] = data
-
-    res.status(201).json({
-        data
-    })
-});
-
-const PORT = 4000;
+const PORT = 4005;
 
 app.listen(PORT, () => console.log('listening on port: ', PORT));

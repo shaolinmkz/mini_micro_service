@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const axios = require('axios');
 const bodyParser = require('body-parser');
 const { randomBytes } = require('crypto');
 
@@ -19,7 +20,7 @@ app.get('/posts/:id/comments', (req, res) => {
     })
 });
 
-app.post('/posts/:id/comments', (req, res) => {
+app.post('/posts/:id/comments', async (req, res) => {
     // 4 bytes of random digits which should be hexidecimals
     const commentId = randomBytes(4).toString('hex');
     const { content } = req.body;
@@ -31,11 +32,20 @@ app.post('/posts/:id/comments', (req, res) => {
 
     commentsByPostId[id] = comments;
 
+    const EVENT_URL = 'http://localhost:4005/events';
+    await axios.post(EVENT_URL, { type: 'CommentCreated', data: { id: commentId, content, postId: req.params.id } });
+
     res.status(201).json({
         data: comments
     })
 });
 
-const PORT = 4001;
+app.post('/events', (req, res) => {
+  console.log('Event Received: ', req.body.type);
+
+  res.send({ message: 'Event Received from Comment Service' });
+});
+
+const PORT = 4002;
 
 app.listen(PORT, () => console.log('listening on port: ', PORT));

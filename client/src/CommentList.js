@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 export default ({ postId }) => {
-  const URL = `http://localhost:4001/posts/${postId}/comments`;
+  const URL = `http://localhost:4002/posts/${postId}/comments`;
 
   const [posts, setPosts] = useState([]);
 
