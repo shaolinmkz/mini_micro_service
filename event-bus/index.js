@@ -17,6 +17,7 @@ app.post('/events', (req, res) => {
       'http://localhost:4000/events', // Post service
       'http://localhost:4002/events', // Comment service
       'http://localhost:4003/events', // Query service
+      'http://localhost:4004/events', // Moderation service
     ];
 
     URLS.forEach(async (url) => {
