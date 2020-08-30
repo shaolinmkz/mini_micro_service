@@ -41,8 +41,10 @@ export default () => {
             <div className="card-body">
               <h4 className="card-title">{`${index + 1}.`}</h4>
               <p className="card-text">{post.title}</p>
-              <CommentCreate postId={post.id} />
-              {!!post.comments.length && <CommentList comments={post.comments} />}
+              <CommentCreate postId={post.id} fetchPosts={fetchPosts} />
+              {!!post.comments.length && (
+              <CommentList comments={post.comments} />
+                )}
             </div>
           </div>
         ))

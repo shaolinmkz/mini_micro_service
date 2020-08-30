@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 
-export default ({ postId }) => {
+export default ({ postId, fetchPosts }) => {
   const URL = `http://localhost:4002/posts/${postId}/comments`;
 
   const [content, setContent] = useState('');
@@ -13,6 +13,7 @@ export default ({ postId }) => {
     try {
       await axios.post(URL, { content });
       setContent('');
+      fetchPosts();
     } catch (error) {
       return error;
     }
