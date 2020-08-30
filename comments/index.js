@@ -43,7 +43,7 @@ app.post('/posts/:id/comments', async (req, res) => {
 app.post('/events', (req, res) => {
   console.log('Event Received: ', req.body.type);
 
-  res.send({ message: 'Event Received from Comment Service' });
+  res.send({ message: 'Event Received => Comment Service' });
 });
 
 const PORT = 4002;

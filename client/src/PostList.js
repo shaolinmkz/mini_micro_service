@@ -6,7 +6,7 @@ import CommentList from './CommentList';
 
 
 export default () => {
-  const URL = 'http://localhost:4000/posts';
+  const URL = 'http://localhost:4003/posts';
   const { saveFunc } = useInnerEyes();
 
   const [posts, setPosts] = useState([]);
@@ -42,7 +42,7 @@ export default () => {
               <h4 className="card-title">{`${index + 1}.`}</h4>
               <p className="card-text">{post.title}</p>
               <CommentCreate postId={post.id} />
-              <CommentList postId={post.id} />
+              {!!post.comments.length && <CommentList comments={post.comments} />}
             </div>
           </div>
         ))
