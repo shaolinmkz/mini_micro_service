@@ -14,8 +14,8 @@ app.use(bodyParser.json());
 const events = [];
 
 app.post('/events', (req, res) => {
-    const { body } = req;
-    events.push(body);
+    const { body: event } = req;
+    events.push(event);
 
     const URLS = [
       'http://localhost:4000/events', // Post service
@@ -25,7 +25,7 @@ app.post('/events', (req, res) => {
     ];
 
     URLS.forEach(async (url) => {
-      await axios.post(url, body)
+      await axios.post(url, event)
       .then(({ data: { message } }) => console.log(message))
       .catch(err => console.error(err.message));
     })
