@@ -1,6 +1,32 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const axios = require('axios');
+
+const handleEvents = ({ type, data }) => {
+  if(type === 'PostCreated') {
+    const { id, title } = data;
+    posts[id] = {
+      id,
+      title,
+      comments: [],
+    }
+  } else if (type === 'CommentCreated') {
+    const { id, content,  postId, status } = data;
+    const post = posts[postId];
+    post.comments.push({
+      id,
+      content,
+      status
+    });
+  } else if(type === 'CommentUpdated') {
+    const { status, postId, content, id } = data;
+    const post = posts[postId];
+    const newComment = post.comments.find(comment => comment.id === id);
+    newComment.status = status;
+    newComment.content = content;
+  }
+}
 
 const app = express();
 
@@ -33,28 +59,21 @@ app.get('/posts', async (req, res) => {
 });
 
 app.post('/events', (req, res) => {
-  const { type, data } = req.body;
+  const { body: event } = req;
 
-  if(type === 'PostCreated') {
-    const { id, title } = data;
-    posts[id] = {
-      id,
-      title,
-      comments: [],
-    }
-  } else if (type === 'CommentCreated') {
-    const { id, content,  postId, status } = data;
-    const post = posts[postId];
-    post.comments.push({
-      id,
-      content,
-      status
-    });
-  }
+  handleEvents(event);
 
   res.status(201).send({ message: 'Event Received => Query Service' });
 })
 
 const PORT = 4003;
 
-app.listen(PORT, () => console.log('listening on port: ', PORT));
+app.listen(PORT, async () => {
+  console.log('listening on port: ', PORT);
+  const EVENT_URL = 'http://localhost:4005/events';
+  const { data: { data } } = await axios.get(EVENT_URL);
+  data.forEach(event => {
+    console.log('Processing =>>', event.type)
+    handleEvents(event);
+  })
+});

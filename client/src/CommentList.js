@@ -13,7 +13,7 @@ export default ({ comments }) => {
             className="card"
           >
             <div className="card-body">
-              <p className="card-text">{`${index + 1}.) ${comment.content}.`}</p>
+              <p className="card-text">{`${index + 1}.) ${comment.status === 'approved' ? comment.content : comment.status === 'pending' ? 'Awaiting approval' : 'Comment rejected'}.`}</p>
             </div>
           </div>
         ))

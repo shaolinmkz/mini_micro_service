@@ -11,8 +11,12 @@ app.use(cors());
 // parse various different custom JSON types as JSON
 app.use(bodyParser.json());
 
+const events = [];
+
 app.post('/events', (req, res) => {
     const { body } = req;
+    events.push(body);
+
     const URLS = [
       'http://localhost:4000/events', // Post service
       'http://localhost:4002/events', // Comment service
@@ -23,12 +27,14 @@ app.post('/events', (req, res) => {
     URLS.forEach(async (url) => {
       await axios.post(url, body)
       .then(({ data: { message } }) => console.log(message))
-      .catch(err => {
-        console.error(err.message)
-      });
+      .catch(err => console.error(err.message));
     })
 
     res.send({ status: 'OK' });
+});
+
+app.get('/events', (req, res) => {
+  res.status(200).json({ data: events });
 });
 
 const PORT = 4005;
