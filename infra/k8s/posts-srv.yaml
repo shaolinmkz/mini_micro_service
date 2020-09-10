@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-srv
+spec:
+  type: NodePort
+  selector:
+    app: posts
+  ports:
+    - name: posts
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
+
+# Node Port service type
+# Usually for development purposes
+# Exposes the post deployment (pod) to the outside world
+# Run kubectl get services to see the service PORT number
+
+# Sample
+# NAME      TYPE      CLUSTER-IP     EXTERNAL-IP  PORT(S)          AGE
+# post-srv  NodePort  10.111.171.95  <none>       4000:31965/TCP   18m
+
+# On POSTMAN you can now hit "http://localhost:31965/posts"
