@@ -8,3 +8,5 @@ spec:
       image: shaolinmkz/posts:0.0.1
 
 # This was an initial example
+# You dont create pods directly
+# Deployments create pods, so when a pod crashes the Deployment re-creates it

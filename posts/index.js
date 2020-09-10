@@ -32,7 +32,7 @@ app.post('/posts', async (req, res) => {
 
     posts[id] = data;
 
-   const EVENT_URL = 'http://localhost:4005/events';
+   const EVENT_URL = 'http://event-bus-srv:4005/events';
    await axios.post(EVENT_URL, { type: 'PostCreated', data });
 
     res.status(201).json({
@@ -48,4 +48,4 @@ app.post('/events', (req, res) => {
 
 const PORT = 4000;
 
-app.listen(PORT, () => console.log('listening on port: ', PORT));
+app.listen(PORT, () => console.log('v1 listening on port: ', PORT));

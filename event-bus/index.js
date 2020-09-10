@@ -18,10 +18,10 @@ app.post('/events', (req, res) => {
     events.push(event);
 
     const URLS = [
-      'http://localhost:4000/events', // Post service
-      'http://localhost:4002/events', // Comment service
-      'http://localhost:4003/events', // Query service
-      'http://localhost:4004/events', // Moderation service
+      'http://posts-clusterip-srv:4000/events', // Post service
+      // 'http://localhost:4002/events', // Comment service
+      // 'http://localhost:4003/events', // Query service
+      // 'http://localhost:4004/events', // Moderation service
     ];
 
     URLS.forEach(async (url) => {
@@ -39,4 +39,4 @@ app.get('/events', (req, res) => {
 
 const PORT = 4005;
 
-app.listen(PORT, () => console.log('listening on port: ', PORT));
+app.listen(PORT, () => console.log('v1 listening on port: ', PORT));
