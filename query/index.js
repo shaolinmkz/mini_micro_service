@@ -70,7 +70,7 @@ const PORT = 4003;
 
 app.listen(PORT, async () => {
   console.log('listening on port: ', PORT);
-  const EVENT_URL = 'http://localhost:4005/events';
+  const EVENT_URL = 'http://event-bus-srv:4005/events';
   const { data: { data } } = await axios.get(EVENT_URL);
   data.forEach(event => {
     console.log('Processing =>>', event.type)

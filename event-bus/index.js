@@ -19,9 +19,9 @@ app.post('/events', (req, res) => {
 
     const URLS = [
       'http://posts-clusterip-srv:4000/events', // Post service
-      // 'http://localhost:4002/events', // Comment service
-      // 'http://localhost:4003/events', // Query service
-      // 'http://localhost:4004/events', // Moderation service
+      'http://comments-clusterip-srv:4002/events', // Comment service
+      'http://query-clusterip-srv:4003/events', // Query service
+      'http://moderation-clusterip-srv:4004/events', // Moderation service
     ];
 
     URLS.forEach(async (url) => {
