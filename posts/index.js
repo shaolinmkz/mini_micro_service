@@ -20,7 +20,7 @@ app.get('/posts', (req, res) => {
     })
 });
 
-app.post('/posts', async (req, res) => {
+app.post('/posts/create', async (req, res) => {
     // 4 bytes of random digits which should be hexidecimals
     const id = randomBytes(4).toString('hex');
     const { title } = req.body;

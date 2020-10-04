@@ -4,7 +4,7 @@ import { useInnerEyes } from 'react-inner-eyes';
 
 
 export default () => {
-  const URL = 'http://localhost:4000/posts';
+  const URL = 'http://blog.com/posts/create';
 
   const { getFuncs } = useInnerEyes();
 

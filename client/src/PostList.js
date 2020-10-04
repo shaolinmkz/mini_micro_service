@@ -6,7 +6,7 @@ import CommentList from './CommentList';
 
 
 export default () => {
-  const URL = 'http://localhost:4003/posts';
+  const URL = 'http://blog.com/posts';
   const { saveFunc } = useInnerEyes();
 
   const [posts, setPosts] = useState([]);
